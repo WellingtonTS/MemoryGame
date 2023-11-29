@@ -124,9 +124,10 @@ function setStartTimer() {
     const dateDiff = new Date(dateNow - initialDateTimer);
     const minutes = String(dateDiff.getMinutes()).padStart("2", "0");
     const seconds = String(dateDiff.getSeconds()).padStart("2", "0");
+    const milliseconds = String(dateDiff.getMilliseconds()).padStart(3, "0");
 
-    timer.innerHTML = `${minutes}:${seconds}`;
-  }, 1000);
+    timer.innerHTML = `${minutes}:${seconds}:${milliseconds}`;
+  }, 100);
 }
 
 const playerName = document.querySelector(".playerName");

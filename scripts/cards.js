@@ -1,9 +1,13 @@
 function backPage() {
-  const playerResp = confirm(
-    "Deseja sair do jogo? Você perderá seu progresso!"
-  );
-  if (playerResp) {
+  if (gameIsFinished) {
     window.history.back();
+  } else {
+    const playerResp = confirm(
+      "Deseja sair do jogo? Você perderá seu progresso!"
+    );
+    if (playerResp) {
+      window.history.back();
+    }
   }
 }
 
@@ -56,6 +60,7 @@ function checkGameWin() {
   const disabledCards = document.querySelectorAll(".disabledCard");
   if (disabledCards.length === 24) {
     clearInterval(finishTimerInterval);
+    gameIsFinished = true;
 
     const userDate = {
       name: storagePlayerName,
@@ -73,6 +78,8 @@ function checkGameWin() {
     alert(
       `Parabéns ${storagePlayerName}, você conclui com tempo de ${timer.innerHTML}!`
     );
+
+    backPage();
   }
 }
 
@@ -145,6 +152,7 @@ createCards();
 
 let firstCard = "";
 let secondCard = "";
+let gameIsFinished = false;
 clickFlipCard();
 
 const initialDateTimer = new Date();
